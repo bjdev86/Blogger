@@ -89,9 +89,9 @@ jobs:
       - name: Install App Dependencies
         run: npm ci
 
-      # Build App --deploy-url /apps/blogger-ang/
+      # Build App (using production configuration by default)
       - name: Build App
-        run: ng build
+        run: ng build --progress
 
       # Setup SSH keys to be added from Git Hub secretes to default files on
       # runner OS. Use default files to preform rsync command to move fresly
@@ -107,5 +107,5 @@ jobs:
         run: rsync -ravih --progress dist/bloglet/ bmiller@137.184.190.165:/var/www/benjmiller.dev/apps/test/blogger-ang
 
       # Restart the Blogger API PM2 process
-      - name: Reload Nginx
-        run: ssh bmiller@137.184.190.165 'nginx -s reload'
+      #- name: Reload Nginx
+        #run: ssh bmiller@137.184.190.165 'nginx -s reload'
