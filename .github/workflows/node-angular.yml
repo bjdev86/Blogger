@@ -44,7 +44,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           # Specificy the node.js version
-          node-version: ${{ matrix.node-version }}
+          node-version: '18.x'
 
       # Commands to run tests
       - run: npm install -g @angular/cli
@@ -73,7 +73,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           # Specificy the node.js version
-          node-version: ${{ matrix.node-version }}
+          node-version: '18.x'
 
       # Install Angular CLI
       - name: Install Angular CLI
