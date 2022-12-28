@@ -58,7 +58,7 @@
                 }
               ],
               "outputHashing": "all",
-              "baseHref": "/apps/blogger-ang/"
+              "baseHref": "/apps/blogger/"
             },
             "development": {
               "buildOptimizer": false,
