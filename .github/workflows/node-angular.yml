@@ -31,15 +31,16 @@ jobs:
     runs-on: ubuntu-latest
 
     # As part of the run strategy pick the node.js version
-    strategy:
-      matrix:
-        node-version: [15.x, 16.x, 17.x, 18.x]
+    #strategy:
+      #matrix:
+        #node-version: [15.x, 16.x, 17.x, 18.x]
 
     # Main steps preformed for this test job
     steps:
       # Check out the repo for use
       - uses: actions/checkout@v3
-      - name: Running tests using Node.js ${{ matrix.node-version }}
+      - name: Running tests using Node.js 18.x
+
         # Use NodeJS
         uses: actions/setup-node@v3
         with:
@@ -47,6 +48,7 @@ jobs:
           node-version: '18.x'
 
       # Commands to run tests
+      - run: ls
       - run: npm install -g @angular/cli
       - run: ng test
 
@@ -60,15 +62,16 @@ jobs:
     runs-on: ubuntu-latest
 
     # As part of the run strategy pick the node.js version
-    strategy:
-      matrix:
-        node-version: [14.x, 16.x, 18.x]
+    #strategy:
+      #matrix:
+        #node-version: [14.x, 16.x, 18.x]
 
     # Main steps preformed for this test job
     steps:
       # Check out the repo for use
       - uses: actions/checkout@v3
-      - name: Building app using Node.js ${{ matrix.node-version }}
+      - name: Building app using Node.js 18.x
+
         # Use NodeJS
         uses: actions/setup-node@v3
         with:
@@ -77,7 +80,9 @@ jobs:
 
       # Install Angular CLI
       - name: Install Angular CLI
-        run: npm install -g @angular/cli
+        run: |
+          ls
+          npm install -g @angular/cli
 
       # Build App
       - name: Build App
