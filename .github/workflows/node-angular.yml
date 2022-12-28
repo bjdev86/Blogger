@@ -105,12 +105,7 @@ jobs:
       # Deploy App code base to Digital Ocean server
       - name: Deploy to Digital Ocean webserver
         run: rsync -ravih --progress dist/bloglet/ bmiller@137.184.190.165:/var/www/benjmiller.dev/apps/test/blogger-ang
-
-      # Tell the server to build the project
-      #- name: Build Blogger API on Server
-        #run: |
-          #ssh bmiller@137.184.190.165 'cd /var/www/benjmiller.dev/pprojects/apps/blogger-ang/ && nest build'
-
+        
       # Restart the Blogger API PM2 process
-      - name: Restart the Blogger API process on Server
-        run: ssh bmiller@137.184.190.165 'pm2 restart Blogget'
+      - name: Reload Nginx
+        run: ssh bmiller@137.184.190.165 'nginx -s reload'
