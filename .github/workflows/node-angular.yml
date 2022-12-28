@@ -105,7 +105,8 @@ jobs:
       # Deploy App code base to Digital Ocean server
       - name: Deploy to Digital Ocean webserver
         run: |
-          rsync -ravih --progress dist/bloget/ bmiller@137.184.190.165:/var/www/benjmiller.dev/pprojects/apps/blogger-ang
+          ls
+          rsync -ravih --progress ./dist/bloget/ bmiller@137.184.190.165:/var/www/benjmiller.dev/pprojects/apps/blogger-ang
 
       # Tell the server to build the project
       #- name: Build Blogger API on Server
