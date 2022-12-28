@@ -36,24 +36,24 @@ jobs:
         #node-version: [15.x, 16.x, 17.x, 18.x]
 
     # Main steps preformed for this test job
-    steps:
-      # Check out the repo for use
-      - uses: actions/checkout@v3
-      - name: Running tests using Node.js 18.x
+    # steps:
+    #   # Check out the repo for use
+    #   - uses: actions/checkout@v3
+    #   - name: Running tests using Node.js 18.x
 
-        # Use NodeJS
-        uses: actions/setup-node@v3
-        with:
-          # Specificy the node.js version
-          node-version: '18.x'
+    #     # Use NodeJS
+    #     uses: actions/setup-node@v3
+    #     with:
+    #       # Specificy the node.js version
+    #       node-version: '18.x'
 
-      # Install node modules
-      - name: Install NPM dependencies
-        run: npm ci
-        
-      # Commands to run tests
-      - run: npm install -g @angular/cli
-      - run: ng test
+    #   # Install node modules
+    #   - name: Install NPM dependencies
+    #     run: npm ci
+
+    #   # Commands to run tests
+    #   - run: npm install -g @angular/cli
+    #   - run: ng test
 
   # Deploying and building will happen in one step since the build process produces needs to happen
   # on the web server.
@@ -83,10 +83,12 @@ jobs:
 
       # Install Angular CLI
       - name: Install Angular CLI
-        run: |
-          npm install -g @angular/cli
-          ls
+        run: npm install -g @angular/cli
 
+      # Install all app dependencies
+      - name: Install App Dependencies
+        run: npm ci
+        
       # Build App
       - name: Build App
         run: ng build
