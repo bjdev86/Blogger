@@ -1,0 +1,83 @@
+# TODO: Create a new user (and thus a different key) for saving built code and restarting apps.
+
+# Main workflow for this API Project
+name: Blogglet Production Pipeline 
+
+# Start this workflow on a dispatch event (manual).
+on:
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+    inputs:
+        logLevel:
+          description: 'Log level'
+          required: true
+          default: 'info'
+          type: choice
+          options:
+          - info
+          - warning
+          - debug
+  
+# The jobs of this work flow will be to test, build and deploy this app to 
+# it's designated server. 
+jobs:
+  
+  # Preform the Jest tests setup for this API to make sure they are all still 
+  # passing 
+  test: 
+    runs-on: ubuntu-latest
+    
+    steps: 
+      - name: Run tests
+        run: echo "To be tested."
+    
+  # Deploying and building will happen in one step since the build process produces needs to happen 
+  # on the web server.
+  deploybuild: 
+
+    # Tests mus be preformed and passed before deployment.
+    #needs: test
+
+    # Specificy which OS following runner will use.  
+    runs-on: ubuntu-latest
+
+    steps: 
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can 
+      # access it
+      - uses: actions/checkout@v3
+      
+      # Setup SSH keys to be added from Git Hub secretes to default files on 
+      # runner OS. Use default files to preform rsync command to move fresly 
+      # built website to webserver  
+      - name: Setup SSH Keys and Known_hosts
+        run: |
+          install -m 600 -D /dev/null ~/.ssh/id_rsa
+          echo "${{ secrets.DIGI_O_KEY }}" > ~/.ssh/id_rsa
+          echo "${{ secrets.KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+      
+      # Install Node.js and NPM 
+      - name: Install Node.js and NPM 
+        run: apt install node && apt install npm 
+        
+      # Install Angular CLI
+      - name: Install Angular CLI
+        run: npm install -g @angular/cli
+        
+      # Build project for deployment 
+      - name: Build Blogger App
+        run: ng deploy
+        
+      # Deploy App code base to Digital Ocean server
+      - name: Deploy to Digital Ocean webserver
+        run: |
+          rsync -ravih --progress . bmiller@137.184.190.165:/var/www/benjmiller.dev/pprojects/apps/blogger-ang
+
+      # Tell the server to build the project 
+      - name: Build Blogger API on Server
+        run: |
+          ssh bmiller@137.184.190.165 'cd /var/www/benjmiller.dev/pprojects/apps/blogger-ang/ && nest build'
+        
+      # Restart the Blogger API PM2 process
+      - name: Restart the Blogger API process on Server
+        run: ssh bmiller@137.184.190.165 'pm2 restart Blog_API'
