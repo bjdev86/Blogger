@@ -109,7 +109,7 @@ jobs:
           ls
           ls dist/
           ls dist/bloglet/
-          rsync -ravih --progress dist/bloget/ bmiller@137.184.190.165:/var/www/benjmiller.dev/pprojects/apps/blogger-ang
+          rsync -ravih --progress dist/bloglet/ bmiller@137.184.190.165:/var/www/benjmiller.dev/pprojects/apps/blogger-ang
 
       # Tell the server to build the project
       #- name: Build Blogger API on Server
