@@ -25,51 +25,19 @@ on:
 # it's designated server.
 jobs:
 
-  # Preform the Jest tests setup for this API to make sure they are all still
-  # passing
-  #test:
-  #  runs-on: ubuntu-latest
-
-    # As part of the run strategy pick the node.js version
-    #strategy:
-      #matrix:
-        #node-version: [15.x, 16.x, 17.x, 18.x]
-
-    # Main steps preformed for this test job
-    # steps:
-    #   # Check out the repo for use
-    #   - uses: actions/checkout@v3
-    #   - name: Running tests using Node.js 18.x
-
-    #     # Use NodeJS
-    #     uses: actions/setup-node@v3
-    #     with:
-    #       # Specificy the node.js version
-    #       node-version: '18.x'
-
-    #   # Install node modules
-    #   - name: Install NPM dependencies
-    #     run: npm ci
-
-    #   # Commands to run tests
-    #   - run: npm install -g @angular/cli
-    #   - run: ng test
-
-  # Deploying and building will happen in one step since the build process produces needs to happen
-  # on the web server.
+  # Main job. The application is tested, if it passes then it is built and
+  # finally deployed on the server.
   deploybuild:
 
-    # Tests mus be preformed and passed before deployment.
-    #needs: test
-
+    # Specify the version of Ubuntu linux that this job will run on.
     runs-on: ubuntu-latest
 
-    # As part of the run strategy pick the node.js version
+    # Try this job on multiple versoins of Node.JS
     #strategy:
       #matrix:
         #node-version: [14.x, 16.x, 18.x]
 
-    # Main steps preformed for this test job
+    # Setup steps for this job.
     steps:
       # Check out the repo for use
       - uses: actions/checkout@v3
@@ -81,13 +49,18 @@ jobs:
           # Specificy the node.js version
           node-version: '18.x'
 
+      # Preform the following steps to run Jest tests prepared for this app.
+      # Install node modules
+      - name: Install NPM dependencies
+        run: npm ci
+
       # Install Angular CLI
       - name: Install Angular CLI
         run: npm install -g @angular/cli
 
-      # Install all app dependencies
-      - name: Install App Dependencies
-        run: npm ci
+      # Run tests
+      # - name: Run tests
+      #   run: ng test
 
       # Build App (using production configuration by default)
       - name: Build App
@@ -104,8 +77,4 @@ jobs:
 
       # Deploy App code base to Digital Ocean server
       - name: Deploy to Digital Ocean webserver
-        run: rsync -ravih --progress dist/bloglet/ bmiller@137.184.190.165:/var/www/benjmiller.dev/apps/test/blogger-ang
-
-      # Restart the Blogger API PM2 process
-      #- name: Reload Nginx
-        #run: ssh bmiller@137.184.190.165 'nginx -s reload'
+        run: rsync -ravih --progress dist/bloglet/ bmiller@137.184.190.165:/var/www/benjmiller.dev/apps/prod/blogger-ang/
