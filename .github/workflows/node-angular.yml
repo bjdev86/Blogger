@@ -27,8 +27,8 @@ jobs:
 
   # Preform the Jest tests setup for this API to make sure they are all still
   # passing
-  test:
-    runs-on: ubuntu-latest
+  #test:
+  #  runs-on: ubuntu-latest
 
     # As part of the run strategy pick the node.js version
     #strategy:
