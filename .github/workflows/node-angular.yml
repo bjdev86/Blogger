@@ -47,8 +47,11 @@ jobs:
           # Specificy the node.js version
           node-version: '18.x'
 
+      # Install node modules
+      - name: Install NPM dependencies
+        run: npm ci
+        
       # Commands to run tests
-      - run: ls
       - run: npm install -g @angular/cli
       - run: ng test
 
@@ -81,8 +84,8 @@ jobs:
       # Install Angular CLI
       - name: Install Angular CLI
         run: |
-          ls
           npm install -g @angular/cli
+          ls
 
       # Build App
       - name: Build App
