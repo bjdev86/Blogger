@@ -89,9 +89,9 @@ jobs:
       - name: Install App Dependencies
         run: npm ci
 
-      # Build App
+      # Build App --deploy-url /apps/blogger-ang/
       - name: Build App
-        run: ng build --deploy-url /apps/blogger-ang/
+        run: ng build
 
       # Setup SSH keys to be added from Git Hub secretes to default files on
       # runner OS. Use default files to preform rsync command to move fresly
