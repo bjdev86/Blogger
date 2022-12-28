@@ -91,7 +91,7 @@ jobs:
 
       # Build App
       - name: Build App
-        run: ng build
+        run: ng build --deploy-url /apps/blogger-ang/
 
       # Setup SSH keys to be added from Git Hub secretes to default files on
       # runner OS. Use default files to preform rsync command to move fresly
@@ -105,7 +105,7 @@ jobs:
       # Deploy App code base to Digital Ocean server
       - name: Deploy to Digital Ocean webserver
         run: rsync -ravih --progress dist/bloglet/ bmiller@137.184.190.165:/var/www/benjmiller.dev/apps/test/blogger-ang
-        
+
       # Restart the Blogger API PM2 process
       - name: Reload Nginx
         run: ssh bmiller@137.184.190.165 'nginx -s reload'
