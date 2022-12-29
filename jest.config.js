@@ -7,6 +7,7 @@ module.exports =
   setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
   globalSetup: 'jest-preset-angular/global-setup',
   testPathIgnorePatterns: ['<rootDir>/src/test.ts'],
+  // Perhaps only '<rootDir>/node_modules' is neccesary 
   transformIgnorePatterns: ['node_modules/(?!@angular|@ngrx|rxjs)',
                             '<rootDir/node_modules/'],
 };

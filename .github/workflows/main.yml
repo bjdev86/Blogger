@@ -59,7 +59,7 @@ jobs:
         run: npm install -g @angular/cli
 
       # Run tests
-      - name: Run tests
+      - name: Run Jest Tests
         run: npm test
 
       # Build App (using production configuration by default)
