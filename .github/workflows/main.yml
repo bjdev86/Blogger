@@ -59,8 +59,8 @@ jobs:
         run: npm install -g @angular/cli
 
       # Run tests
-      # - name: Run tests
-      #   run: ng test
+      - name: Run tests
+        run: npm test
 
       # Build App (using production configuration by default)
       - name: Build App
