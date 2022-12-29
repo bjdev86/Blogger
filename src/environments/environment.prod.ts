@@ -3,5 +3,5 @@
 export const environment =
 {
   production: true,
-  baseRef: "/apps/blogger-ang/"
+  baseRef: "/apps/blogger/"
 };
