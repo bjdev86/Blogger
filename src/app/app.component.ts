@@ -1,13 +1,14 @@
+/**
+ * Design inspiration: https://www.apartmenttherapy.com/moving-back-in-with-parents-essay-37172762?spot_im_redirect_source=pitc
+ */
 import { Component } from '@angular/core';
-import { BlogChannelService } from './services/blogchannel.service';
 import { BlogpostComponent } from './blogpost/blogpost.component';
 
 @Component({
   moduleId: 'main',
   selector: 'app-root',
   templateUrl: "app.component.html",
-  styleUrls: ['./app.component.scss'],
-  providers: [BlogChannelService]
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent
 {
@@ -15,7 +16,7 @@ export class AppComponent
   title = 'Blogger';
 
   // Class constructor
-  constructor(private blogChannel: BlogChannelService)
+  constructor()
   {
     // this.blogChannel.getAllBlogPosts();
   }
