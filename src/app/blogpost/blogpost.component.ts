@@ -21,7 +21,7 @@ export class BlogpostComponent implements OnInit
 {
   // Class Member Declaration
   public blogPost: string;
-  public topLevelReplies: Record<string, string>;
+  public topLevelReplies: Record<string, string>[];
 
   // Life cycle functoins
   ngOnInit(): void
@@ -37,9 +37,7 @@ export class BlogpostComponent implements OnInit
   {
     // Intialize public data members
     this.blogPost = "";
-    this.topLevelReplies = {};
-
-    
+    this.topLevelReplies = [];
   }
 
   // Function to issue a post to the API
