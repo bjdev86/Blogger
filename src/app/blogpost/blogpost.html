@@ -9,10 +9,11 @@
     {{ blogPost }}
   </div>
   <!-- Div to contain all the replies to the original blog post -->
-  <div class="reply-posts">
+  <!-- [replyPost] = "reply" -->
+  <app-replypost *ngFor = "let reply of topLevelReplies" >
     <!-- Iterate all the replies placing them in reply posts along the way. -->
-    *ngFor = "let reply of replies"
-  </div>
+
+  </app-replypost>
   <!-- Div to hold the reply post in response to the original blog post-->
   <div class="blog-post-reply-editor">
 
