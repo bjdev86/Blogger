@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-@Component({
+@Component(
+{
   selector: 'app-replypost',
   template: `
     <p>
@@ -9,11 +10,17 @@ import { Component, OnInit } from '@angular/core';
   `,
   styleUrls: ['./replypost.component.scss']
 })
-export class ReplypostComponent implements OnInit {
+export class ReplypostComponent implements OnInit
+{
+  public replyPost: Record<string, string>;
 
-  constructor() { }
+  ngOnInit(): void
+  {
 
-  ngOnInit(): void {
   }
 
+  constructor()
+  {
+    this.replyPost = {};
+  }
 }
